@@ -32,6 +32,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,13 +58,6 @@ public class UserControllerIntegrationTest {
 	
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	
-	private ResponseEntity<User> createUser(User user) {
-		HttpEntity<User> request = new HttpEntity<>(user);
-		ResponseEntity<User> response = testRestTemplate
-				.exchange(fullUrl, HttpMethod.POST, request, User.class);
-		return response;
-	}
-	
 	@Before 
 	public void init() {
 		fullUrl = url+port+api;
@@ -71,7 +66,9 @@ public class UserControllerIntegrationTest {
 	@Test
 	public void createUserTest() throws Exception{
 		User user = new User("Bob");
-		ResponseEntity<User> response = createUser(user);		  
+		HttpEntity<User> request = new HttpEntity<>(user);
+		ResponseEntity<User> response = testRestTemplate
+				.exchange(fullUrl, HttpMethod.POST, request, User.class);
 		assertThat(response.getStatusCode(), is(HttpStatus.OK));
 		User responseBody = response.getBody();
 		assertNotNull(responseBody);
@@ -89,15 +86,7 @@ public class UserControllerIntegrationTest {
 		assertThat(userRepository.existsById(user.getId())).isFalse();
 	}
 	
-	@Test
-	public void readUserTest() throws Exception{
-		User user = new User("Bob");
-		user = userRepository.save(user);
-		User userResult = testRestTemplate.getForObject(fullUrl+"/"+user.getId(), User.class);
-		assertNotNull(userResult);
-		assertThat(user.fieldsAreEqualTo(userResult)).isTrue();
-		userRepository.deleteAll();
-	}
+
 	
 	@Test
 	public void readUsersTest() throws Exception{
@@ -114,6 +103,27 @@ public class UserControllerIntegrationTest {
 		.usingElementComparator( (u1, u2)->{ 
 			return u1.fieldsAreEqualTo(u2) ? 0: 1;
 			}).containsExactlyInAnyOrder(user1, user2);
+		
+	}
+	
+	@Test
+	public void readUserTest() throws Exception{
+		User user = new User("Bob");
+		user = userRepository.save(user);
+		User userResult = testRestTemplate.getForObject(fullUrl+"/"+user.getId(), User.class);
+		assertNotNull(userResult);
+		assertThat(user.fieldsAreEqualTo(userResult)).isTrue();
+		userRepository.deleteAll();
+	}
+	
+	@Test
+	public void updateUserTest() throws Exception{
+		User user = new User("Bob");
+		user = userRepository.save(user);
+		String newName = "Bill";
+		user.setUserName(newName);
+		User userResult = testRestTemplate.postForObject(fullUrl+"/"+user.getId(), user, User.class);
+		assertThat(user.fieldsAreEqualTo(userResult));
 		
 	}
 }
