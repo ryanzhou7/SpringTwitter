@@ -28,7 +28,10 @@ public class Tweet {
 	private User user;
 	
 	protected Tweet() {}
-	public Tweet(User user, String message) {}
+	public Tweet(User user, String message) {
+		this.user = user;
+		this.message = message;
+	}
 	public String getMessage() {
 		return message;
 	}
