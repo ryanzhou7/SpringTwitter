@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User implements Comparator<User>{
+public class User{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id; 
@@ -40,14 +40,12 @@ public class User implements Comparator<User>{
 	public String toString() {
 		return "{id:"+ getId() + ", " + "username:" + getUserName()+"}";
 	}
-
-	@Override
-	public int compare(User o1, User o2) {
-		if(o1.getId().equals(o2.getId()) && o1.getUserName().equals(o2.getUserName())) {
-			return 0;
-		}
-		return -1;
+	
+	public boolean fieldsAreEqualTo(User other) {
+		if( this.id.equals(other.getId()) 
+				&& this.getUserName().equals(other.getUserName()) )
+			return true;
+		return false;
 	}
 	
-
 }
