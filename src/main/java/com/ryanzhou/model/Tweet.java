@@ -17,31 +17,54 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Tweet {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String message;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="post_id", nullable=false)
-	@OnDelete(action=OnDeleteAction.CASCADE)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private User user;
-	
-	protected Tweet() {}
+
+	protected Tweet() {
+	}
+
 	public Tweet(User user, String message) {
 		this.user = user;
 		this.message = message;
 	}
+
 	public String getMessage() {
 		return message;
 	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public boolean isEqualTo(Tweet other) {
+		return (this.message.equals(other.getMessage()) && this.id.equals(other.getId()));
+	}
+
+	@Override
+	public String toString() {
+		return String.format("{id:%s, message:%s}", id, message);
 	}
 }

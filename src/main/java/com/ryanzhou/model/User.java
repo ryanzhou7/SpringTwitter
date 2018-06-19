@@ -41,7 +41,9 @@ public class User{
 		return "{id:"+ getId() + ", " + "username:" + getUserName()+"}";
 	}
 	
-	public boolean fieldsAreEqualTo(User other) {
+	@Override
+	public boolean equals(Object obj) {
+		User other = (User)obj;
 		if( this.id.equals(other.getId()) 
 				&& this.getUserName().equals(other.getUserName()) )
 			return true;
