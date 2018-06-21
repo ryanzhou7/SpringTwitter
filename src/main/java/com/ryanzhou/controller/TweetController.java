@@ -30,6 +30,7 @@ public class TweetController {
 
 	@PostMapping
 	public Tweet createTweet(@PathVariable Long userId, @RequestBody Tweet tweet) {
+		tweet.setId(null);
 		tweet.setUser(userRepository.getOne(userId));
 		return tweetRepository.save(tweet);
 	}

@@ -51,12 +51,16 @@ public class TweetRepositoryIntegrationTest {
 
 	@Test
 	public void findByUserAndIdTest() {
-		fail();
+		Tweet tweet1 = tweetRepository.save(new Tweet(user, "Hi"));
+		Tweet tweetResult = tweetRepository.findByUserIdAndId(user.getId(), tweet1.getId());
+		assertThat(tweetResult.equals(tweet1)).isTrue();
 	}
-
 	
 	@Test
 	public void deleteByUserAndIdTest() {
-		fail();
+		Tweet tweet1 = tweetRepository.save(new Tweet(user, "Hi"));
+		assertThat(tweetRepository.existsById(tweet1.getId())).isTrue();
+		tweetRepository.deleteByUserIdAndId(user.getId(), tweet1.getId());
+		assertThat(tweetRepository.existsById(tweet1.getId())).isFalse();
 	}
 }

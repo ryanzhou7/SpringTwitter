@@ -9,6 +9,6 @@ import com.ryanzhou.model.User;
 
 public interface TweetRepository extends JpaRepository<Tweet, Long>{
 	public List<Tweet> findAllByUser(User user);
-	public Tweet findByUserAndId(User user, Long tweetId);
-	public void deleteByUserAndId(User user, Long tweetId);
+	public Tweet findByUserIdAndId(Long userId, Long tweetId);
+	public void deleteByUserIdAndId(Long userId, Long tweetId);
 }

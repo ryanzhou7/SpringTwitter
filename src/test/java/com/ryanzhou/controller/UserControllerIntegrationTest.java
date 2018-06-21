@@ -74,6 +74,20 @@ public class UserControllerIntegrationTest {
 		assertThat(user.equals(responseBody)).isTrue();
 		userRepository.deleteAll();
 	}
+	
+	@Test
+	public void createUserWithInvalidIdTest() throws Exception {
+		User user = new User("Bob");
+		user.setId(-1L);
+		HttpEntity<User> request = new HttpEntity<>(user);
+		ResponseEntity<User> response = testRestTemplate.exchange(fullUrl, HttpMethod.POST, request, User.class);
+		assertThat(response.getStatusCode(), is(HttpStatus.OK));
+		User responseBody = response.getBody();
+		assertNotNull(responseBody);
+		user.setId(responseBody.getId());
+		assertThat(user.equals(responseBody)).isTrue();
+		userRepository.deleteAll();
+	}
 
 	@Test
 	public void deleteUserTest() throws Exception {
