@@ -2,6 +2,7 @@ package com.ryanzhou.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -46,5 +47,16 @@ public class TweetRepositoryIntegrationTest {
 		assertThat(foundTweets).usingElementComparator(
 				(Tweet expected, Tweet actual)->{return expected.equals(actual)?0:1;})
 		.containsExactlyInAnyOrder(tweet1, tweet2);
+	}
+
+	@Test
+	public void findByUserAndIdTest() {
+		fail();
+	}
+
+	
+	@Test
+	public void deleteByUserAndIdTest() {
+		fail();
 	}
 }

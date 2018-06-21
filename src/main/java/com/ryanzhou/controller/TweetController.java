@@ -35,7 +35,7 @@ public class TweetController {
 	}
 
 	@DeleteMapping("/{tweetId}")
-	public void deleteTweet(@PathVariable Long tweetId) {
+	public void deleteTweet(@PathVariable Long userId, @PathVariable Long tweetId) {
 		tweetRepository.deleteById(tweetId);
 	}
 
@@ -46,7 +46,7 @@ public class TweetController {
 	}
 
 	@GetMapping("/{tweetId}")
-	public Tweet readTweet(@PathVariable Long tweetId) {
+	public Tweet readTweet(@PathVariable Long userId, @PathVariable Long tweetId) {
 		return tweetRepository.getOne(tweetId);
 	}
 
