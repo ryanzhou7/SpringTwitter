@@ -50,6 +50,18 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- H2 Database -->
+		 <dependency>
+		 	<groupId>com.h2database</groupId>
+		 	<artifactId>h2</artifactId>
+		 </dependency>
+		
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<dependency>
 		    <groupId>io.springfox</groupId>
@@ -69,11 +81,7 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         
-        <dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+
 		
 	</dependencies>
 

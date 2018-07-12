@@ -26,7 +26,6 @@ public class TweetRepositoryIntegrationTest {
 	@Autowired
 	UserRepository userRepository;
 
-
 	private User user;
 
 	@Before
