@@ -2,12 +2,7 @@
 ## Description
 Restful twitter clone backend api. Able to CRUD users/tweets (that belong to users). Test Driven Development, complete with user/tweet controller and repository integration tests. Uses Spring Web, Spring data JPA, H2 database, Swagger for api documentation, and Thyme leaf for landing page.
 
-## App Running on AWS
-[To be updated]()
-
-Add "/swagger-ui.html#/" to end of url for swagger's rest client to test out the app or click
-
-[http://springtwitter-env.byeuzxsjhm.us-west-1.elasticbeanstalk.com/swagger-ui.html#/](http://springtwitter-env.byeuzxsjhm.us-west-1.elasticbeanstalk.com/swagger-ui.html#/)
+Add "/swagger-ui.html#/" to end of url for swagger's rest client to test out the app
 
 ## How To Run Locally with Spring Tool Suite(STS)
 * $git clone [git@github.com:ryanzhou7/SpringTwitter.git](git@github.com:ryanzhou7/SpringTwitter.git)
